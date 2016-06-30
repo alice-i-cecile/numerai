@@ -1,21 +1,21 @@
 # Libraries ####
 
 # Model fitting scripts ####
-source("fit_glmnet.R")
-source("fit_lm.R")
-source("fit_logistic.R")
-source("fit_rf.R")
+source("./Scripts/Models/fit_glmnet.R")
+source("./Scripts/Models/fit_lm.R")
+source("./Scripts/Models/fit_logistic.R")
+source("./Scripts/Models/fit_rf.R")
 
 # Setup ####
 
 # Load in the data set
-data <- read.csv("./Data/numerai_training_data.csv")
+my_data <- read.csv("./Data/numerai_training_data.csv")
 
 # Split into training and test partitions
-train_split <- createDataPartition(y = data$target, times = 1, p = 0.7)
+train_split <- createDataPartition(y = my_data$target, times = 1, p = 0.7)
 
-train_data <- data[train_split,]
-test_data <- data[-train_split,]
+train_data <- my_data[train_split[[1]],]
+test_data <- my_data[-train_split[[1]],]
 
 # Model fitting wrapper ####
 fit_model <- function(method="lm", ...){
